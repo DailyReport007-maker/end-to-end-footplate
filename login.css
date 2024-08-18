@@ -1,0 +1,62 @@
+/* Reset default margin and padding, and set font and background */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background: url('CDR BACK 2.jpg') no-repeat center center fixed;
+  background-size: cover;
+  height: 125vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Styling for the form container */
+#loginForm {
+  width: 100%;
+            max-width: 400px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.2); /* Slightly more transparent */
+            border-radius: 10px;
+            backdrop-filter: blur(10px); /* Adjust blur for better effect */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adjusted shadow for clarity */
+            border: 1px solid rgba(255, 255, 255, 0.5); /* Slightly more visible border */
+            position: relative; /* Ensure positioning context */
+}
+
+/* Styling for form elements */
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+select, input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+#responseMessage {
+  margin-top: 15px;
+  font-weight: bold;
+  text-align: center;
+}

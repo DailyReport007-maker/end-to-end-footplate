@@ -1,0 +1,83 @@
+/* General styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: white;
+}
+
+/* Container for the content */
+.container {
+    text-align: center;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Heading styles */
+.container h1 {
+    margin-bottom: 30px;
+    font-size: 2em;
+    font-weight: bold;
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Button styles */
+.container button {
+    background: #1e90ff;
+    border: none;
+    color: white;
+    padding: 15px 30px;
+    font-size: 1em;
+    margin: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Hover effect for buttons */
+.container button:hover {
+    background: #104e8b;
+    transform: scale(1.05);
+}
+
+/* Button click animation */
+.container button:active {
+    background: #4682b4;
+    transform: scale(0.95);
+}
+
+/* Keyframe animation for heading */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive design for mobile */
+@media (max-width: 600px) {
+    .container {
+        padding: 20px;
+    }
+
+    .container h1 {
+        font-size: 1.5em;
+    }
+
+    .container button {
+        width: 100%;
+        padding: 12px 0;
+        margin: 10px 0;
+    }
+}

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Google Sheet.css">
+    <title>ABNORMALITY DAILY REPORT FOR CLI</title>
+    <style>
+        form {
+            max-width: 600px;
+            margin: auto;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0 10px;
+        }
+        textarea {
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <h2>ABNORMALITY DAILY REPORT FOR CLI</h2>
+    <form id="abnormalityReportForm" action="https://script.google.com/macros/s/AKfycbwDVl9yZmBQpmWNPMAe78ST48JycQHtWHJq-YEMVirgP4WLctDbk4x35jTZsoBVL37Bzw/exec" method ="post">
+        <label for="CLI NAME">CLI NAME:</label>
+        <select id="CLI NAME"name="CLI NAME" required>
+            <option value="" disabled selected>Select your CLI NAME</option>
+            <option value="A.K PANDA">A.K.PANDA</option>
+            <option value="A.K VERMA">A.K.VERMA</option>
+            <option value="A.V BAPAT">A.V BAPAT</option>
+            <option value="ASHISH MISHRA">ASHISH MISHRA</option>
+            <option value="ANANT KHOSLA">ANANT KHOSLA</option>
+            <option value="A.R.BHARGAVA">A.R.BHARGAVA</option>
+            <option value="A K BISWAL ">A K BISWAL </option>
+            <option value="A.N PANDEY">A.N PANDEY</option>
+            <option value="ABDUL SAMAD GHAURI">ABDUL SAMAD GHAURI</option>
+            <option value="ADESH SHUKLA">ADESH SHUKLA</option>
+            <option value="AJAY KUMAR">AJAY KUMAR</option>
+            <option value="ANIL KUMAR">ANIL KUMAR</option>
+            <option value="ASHOK KUMAR">ASHOK KUMAR</option>
+            <option value="ASHOK KUMAR MISHRA">ASHOK KUMAR MISHRA</option>
+            <option value="B.R BHARADWAJ">B.R BHARADWAJ</option>
+            <option value="B G RAHULAN">B G RAHULAN</option>
+            <option value="B.VENKATSWARLU">B.VENKATSWARLU</option>
+            <option value="B.K.DAS">B.K.DAS</option>
+            <option value="B.HIRENDRA KUMAR">B.HIRENDRA KUMAR</option>
+            <option value="BHASKAR SAHOO">BHASKAR SAHOO</option>
+            <option value="BHAWANAND GOPE">BHAWANAND GOPE</option>
+            <option value="BIDHAN CHANDRA ROY">BIDHAN CHANDRA ROY</option>
+            <option value="BRIJ BHUSHAN SINGH">BRIJ BHUSHAN SINGH</option>
+            <option value="BRIJESH SHARMA">BRIJESH SHARMA</option>
+            <option value="CHAKRESH KUMAR">CHAKRESH KUMAR</option>
+            <option value="CHAMAN LAL">CHAMAN LAL</option>
+            <option value="C.S KURREY">C.S KURREY</option>
+            <option value="CHANDRA PRAKASH RATHORE">CHANDRA PRAKASH RATHORE</option>
+            <option value="CHANDRA SHEKHAR SONI">CHANDRA SHEKHAR SONI</option>
+            <option value="CHANDRASHEKHAR">CHANDRASHEKHAR</option>
+            <option value="CHHOTE LAL">CHHOTE LAL</option>
+            <option value="D.K.RAY">D.K.RAY</option>
+            <option value="D.K.RAI">D.K.RAI</option>
+            <option value="D.S.PAIKRA">D.S.PAIKRA</option>
+            <option value="D.SANGA">D.SANGA</option>
+            <option value="DHIRAJ KUMAR SHARMA">DHIRAJ KUMAR SHARMA</option>
+            <option value="DAYARAM PASWAN">DAYARAM PASWAN</option>
+            <option value="DHARAM PAL">DHARAM PAL</option>
+            <option value="DILHARAN LAL ADITYA">DILHARAN LAL ADITYA</option>
+            <option value="DINESH KUMAR RAIDAS">DINESH KUMAR RAIDAS</option>
+            <option value="G L TANDON">G L TANDON</option>
+            <option value="G.GOVIND RAO">G.GOVIND RAO</option>
+            <option value="G.N.ORAM">G.N.ORAM</option>
+            <option value="G.P.KASHYAP">G.P.KASHYAP</option>
+            <option value="GAUKARAN KUMBHAKAR">GAUKARAN KUMBHAKAR</option>
+            <option value="GOPAL DAS">GOPAL DAS</option>
+            <option value="GOPI KUMAR KANWAR">GOPI KUMAR KANWAR</option>
+            <option value="H.N.NAYAK">H.N.NAYAK</option>
+            <option value="H.K.HOTA">H.K.HOTA</option>
+            <option value="HARI SHANKAR SINGH">HARI SHANKAR SINGH</option>
+            <option value="HARISH KUMAR SHARMA">HARISH KUMAR SHARMA</option>
+            <option value="HEMANT KUMAR DEULKAR">HEMANT KUMAR DEULKAR</option>
+            <option value="HEMANT KUMAR MAHOR">HEMANT KUMAR MAHOR</option>
+            <option value="HIMMAT SINGH BHADAURIA">HIMMAT SINGH BHADAURIA</option>
+            <option value="J.ORAON">J.ORAON</option>
+            <option value="J.P.VERMA">J.P.VERMA</option>
+            <option value="JAI GOVIND">JAI GOVIND</option>
+            <option value="JAGAT PAL BOUDDH">JAGAT PAL BOUDDH</option>
+            <option value="JASWANT SINGH">JASWANT SINGH</option>
+            <option value="KAMESHWAR SINGH RAJPUT">KAMESHWAR SINGH RAJPUT</option>
+            <option value="KAMLESH VERMA">KAMLESH VERMA</option>
+            <option value="KARTA LAKRA">KARTA LAKRA</option>
+            <option value="KHELA MARDI">KHELA MARDI</option>
+            <option value="LAXMIKANT SHARAFF">LAXMIKANT SHARAFF</option>
+            <option value="LOKNATH PRADHAN">LOKNATH PRADHAN</option>
+            <option value="LAXMAN PRASAD">LAXMAN PRASAD</option>
+            <option value="M SANYASI">M SANYASI</option>
+            <option value="M.K.PANDAB">M.K.PANDAB</option>
+            <option value="M.K.TIWARI">M.K.TIWARI</option>
+            <option value="M.NAYAK">M.NAYAK</option>
+            <option value="M.S.MARABI">M.S.MARABI</option>
+            <option value="MAHENDRA KUMAR">MAHENDRA KUMAR</option>
+            <option value="MAHESH KUMAR YADAV">MAHESH KUMAR YADAV</option>
+            <option value="MANOJ KUMAR CHANDRAKER">MANOJ KUMAR CHANDRAKER</option>
+            <option value="MANOJ TIWARI">MANOJ TIWARI</option>
+            <option value="MD.TANVIR ALAM">MD.TANVIR ALAM</option>
+            <option value="MARTAND VERMA">MARTAND VERMA</option>
+            <option value="N.K.BANJARE">N.K.BANJARE</option>
+            <option value="N.K.PRASAD">N.K.PRASAD</option>
+            <option value="N.R.MISHRA">N.R.MISHRA</option>
+            <option value="N.RAVICHANDRAN">N.RAVICHANDRAN</option>
+            <option value="N.SAHU">N.SAHU</option>
+            <option value="NARAYAN PANDA">NARAYAN PANDA</option>
+            <option value="OMPRAKASH">OMPRAKASH</option>
+            <option value="P.K.SHRIVASATAVA">P.K.SHRIVASATAVA</option>
+            <option value="P.LIGARI">P.LIGARI</option>
+            <option value="P.M.PAL">P.M.PAL</option>
+            <option value="P.K.SAHOO">P.K.SAHOO</option>
+            <option value="P.MITRA ">P.MITRA </option>
+            <option value="PARMANAND">PARMANAND</option>
+            <option value="P.S.PRADHAN">P.S.PRADHAN</option>
+            <option value="P NAGESHWAR RAO">P NAGESHWAR RAO</option>
+            <option value="PRABHAT KUMAR DAS">PRABHAT KUMAR DAS</option>
+            <option value="PRADEEP KUMAR GUPTA">PRADEEP KUMAR GUPTA</option>
+            <option value="PREM PRAKASH TIWARI">PREM PRAKASH TIWARI</option>
+            <option value="R.C.SAHU">R.C.SAHU</option>
+            <option value="R.S.THAKUR">R.S.THAKUR</option>
+            <option value="RAM AWADH">RAM AWADH</option>
+            <option value="RAMESH YADAV">RAMESH YADAV</option>
+            <option value="RAMSAJEEWAN PATEL">RAMSAJEEWAN PATEL</option>
+            <option value="RAVINDRA KUMAR SWARNKAR">RAVINDRA KUMAR SWARNKAR</option>
+            <option value="S.C.MAURYA">S.C.MAURYA</option>
+            <option value="S.K.ACHARYA">S.K.ACHARYA</option>
+            <option value="S.K.DAS">S.K.DAS</option>
+            <option value="S.K.GOUDA">S.K.GOUDA</option>
+            <option value="S.K.KUSHWAHA">S.K.KUSHWAHA</option>
+            <option value="S.K.SAHU ">S.K.SAHU </option>
+            <option value="S.K.SUMAN">S.K.SUMAN</option>
+            <option value="S.K.TRIPATHI">S.K.TRIPATHI</option>
+            <option value="S.P.DEY">S.P.DEY</option>
+            <option value="S.P.RAMASHANKAR">S.P.RAMASHANKAR</option>
+            <option value="S.PARIDA">S.PARIDA</option>
+            <option value="S.S.KOLWADKAR">S.S.KOLWADKAR</option>
+            <option value="SANDEEP CHOUBEY">SANDEEP CHOUBEY</option>
+            <option value="SANDEEP KUMAR">SANDEEP KUMAR</option>
+            <option value="SANJAY GIRI">SANJAY GIRI</option>
+            <option value="SANT BHUSHAN PATLEY">SANT BHUSHAN PATLEY</option>
+            <option value="SANTOSH KUMAR">SANTOSH KUMAR</option>
+            <option value="SHAKIL AHMED">SHAKIL AHMED</option>
+            <option value="SHASHI BHUSAN">SHASHI BHUSAN</option>
+            <option value="SHYAM BIHARI SINGH">SHYAM BIHARI SINGH</option>
+            <option value="SHYAMAL DAS ">SHYAMAL DAS </option>
+            <option value="SUBHASH CHANDRA">SUBHASH CHANDRA</option>
+            <option value="SUBODH KUMAR">SUBODH KUMAR</option>
+            <option value="SUMANT KUMAR BAGHMAR">SUMANT KUMAR BAGHMAR</option>
+            <option value="SURENDRA KUMAR PRETA">SURENDRA KUMAR PRETA</option>
+            <option value="SURESH CHANDRA">SURESH CHANDRA</option>
+            <option value="SURESH SINGH CHAUHAN">SURESH SINGH CHAUHAN</option>
+            <option value="T.K.VERMA">T.K.VERMA</option>
+            <option value="T.L.TARAR">T.L.TARAR</option>
+            <option value="U.K.MADHU">U.K.MADHU</option>
+            <option value="U.P.SINHA">U.P.SINHA</option>
+            <option value="UTTAM KUMAR SAHU">UTTAM KUMAR SAHU</option>
+            <option value="VIDYAKAR RAI">VIDYAKAR RAI</option>
+            <option value="VIJAY KUMAR">VIJAY KUMAR</option>
+            <option value="VIKASH KUMAR">VIKASH KUMAR</option>
+            <option value="VINAY KUMAR SAHU">VINAY KUMAR SAHU</option>
+            <option value="VINOD KUMAR">VINOD KUMAR</option>
+            <option value="VINOD KUMAR RAI">VINOD KUMAR RAI</option>
+            <option value="VISHNU MOHAN SINGH RAJPUT">VISHNU MOHAN SINGH RAJPUT</option>
+            <option value="VIVEK KUMAR">VIVEK KUMAR</option>
+            <option value="YASHWANT KUMAR VERMA">YASHWANT KUMAR VERMA</option>
+            <option value="YOGENDRA KUMAR">YOGENDRA KUMAR</option>
+          
+        </select>
+
+        <label for="CLI LOBBY">CLI LOBBY:</label>
+        <select id="CLI LOBBY"name="CLI LOBBY" required>
+            <option value="" disabled selected>Select your CLI LOBBY</option>
+            <option value="AKT">AKT</option>
+            <option value="BJRI">BJRI</option>
+            <option value="BRJN">BRJN</option>
+            <option value="BSP">BSP</option>
+            <option value="KHS">KHS</option>
+            <option value="KRBA">KRBA</option>
+            <option value="PND">PND</option>
+            <option value="RIG">RIG</option>
+            <option value="SDL">SDL</option>
+            <option value="SJQ">SJQ</option>
+            <option value="USL">USL</option>
+
+        </select>
+
+            
+        
+        <label for="DATE">DATE:</label>
+        <input type="DATE" id="DATE" name="DATE" required>
+        
+        <label for="FOOTPLATE DURING WEE HOURS">FOOTPLATE DURING WEE HOURS:</label>
+        <input type="number" id="FOOTPLATE DURING WEE HOURS" name="FOOTPLATE DURING WEE HOURS" min="0" required>
+
+        <label for="ABNORMALITIES ON FOOTPLATE DURING WEE HOURS">ABNORMALITIES ON FOOTPLATE DURING WEE HOURS:</label>
+        <input type="number" id="ABNORMALITIES ON FOOTPLATE DURING WEE HOURS" name="ABNORMALITIES ON FOOTPLATE DURING WEE HOURS"min="0" required>
+        
+        <label for="FOOTPLATE EXCLUDING WEE HOURS">FOOTPLATE EXCLUDING WEE HOURS:</label>
+        <input type="number" id="FOOTPLATE EXCLUDING WEE HOURS" name="FOOTPLATE EXCLUDING WEE HOURS"min="0" required>
+
+        <label for="ABNORMALITIES ON FOOTPLATE EXCLUDING WEE HOURS">ABNORMALITIES ON FOOTPLATE EXCLUDING WEE HOURS:</label>
+        <input type="number" id="ABNORMALITIES ON FOOTPLATE EXCLUDING WEE HOURS" name="ABNORMALITIES ON FOOTPLATE EXCLUDING WEE HOURS"min="0" required>
+        
+        <label for="SPECIAL FOOTPLATE(IMPROVING DRIVING/BRAKING TECHNIQUES LIKE HANDLING)">SPECIAL FOOTPLATE(IMPROVING DRIVING/BRAKING TECHNIQUES LIKE HANDLING):</label>
+        <input type="number" id="SPECIAL FOOTPLATE(IMPROVING DRIVING/BRAKING TECHNIQUES LIKE HANDLING)" name="SPECIAL FOOTPLATE(IMPROVING DRIVING/BRAKING TECHNIQUES LIKE HANDLING)"min="0" required>
+        
+        <label for="AUTO AND IB AMBUSH(NO OF TRAINS)">AUTO AND IB AMBUSH(NO OF TRAINS):</label>
+        <input type="number" id="AUTO AND IB AMBUSH(NO OF TRAINS)" name="AUTO AND IB AMBUSH(NO OF TRAINS)"min="0" required>
+
+        <label for="ABNORMALITIES ON AUTO AND IB AMBUSH">ABNORMALITIES ON AUTO AND IB AMBUSH:</label>
+        <input type="number" id="ABNORMALITIES ON AUTO AND IB AMBUSH" name="ABNORMALITIES ON AUTO AND IB AMBUSH"min="0" required>
+        
+        <label for="LEVEL CROSSING AMBUSH(NO OF TRAINS)">LEVEL CROSSING AMBUSH(NO OF TRAINS):</label>
+        <input type="number" id="LEVEL CROSSING AMBUSH(NO OF TRAINS)" name="LEVEL CROSSING AMBUSH(NO OF TRAINS)"min="0" required>
+
+        <label for="ABNORMALITIES ON LEVEL CROSSING AMBUSH">ABNORMALITIES ON LEVEL CROSSING AMBUSH:</label>
+        <input type="number" id="ABNORMALITIES ON LEVEL CROSSING AMBUSH" name="ABNORMALITIES ON LEVEL CROSSING AMBUSH"min="0" required>
+        
+        <label for="CD ZONES AMBUSH(NO OF TRAINS)">CD ZONES AMBUSH(NO OF TRAINS):</label>
+        <input type="number" id="CD ZONES AMBUSH(NO OF TRAINS)" name="CD ZONES AMBUSH(NO OF TRAINS)"min="0" required>
+
+        <label for="ABNBORMALITIES ON CD ZONES AMBUSH">ABNBORMALITIES ON CD ZONES AMBUSH:</label>
+        <input type="number" id="ABNBORMALITIES ON CD ZONES AMBUSH" name="ABNBORMALITIES ON CD ZONES AMBUSH"min="0" required>
+
+        <label for="BA AMBUSH(NO OF CREWS)">BA AMBUSH(NO OF CREWS):</label>
+        <input type="number" id="BA AMBUSH(NO OF CREWS)" name="BA AMBUSH(NO OF CREWS)"min="0" required>
+
+        <label for="ABNORMALITIES ON BA AMBUSH">ABNORMALITIES ON BA AMBUSH:</label>
+        <input type="number" id="ABNORMALITIES ON BA AMBUSH" name="ABNORMALITIES ON BA AMBUSH"min="0" required>
+        
+        <label for="SPEED GUN CHECKING(NO OF TRAINS)">SPEED GUN CHECKING(NO OF TRAINS):</label>
+        <input type="number" id="SPEED GUN CHECKING(NO OF TRAINS)" name="SPEED GUN CHECKING(NO OF TRAINS)"min="0" required>
+
+        <label for="ABNORMALITIES ON SPEED GUN CHECKING">ABNORMALITIES ON SPEED GUN CHECKING:</label>
+        <input type="number" id="ABNORMALITIES ON SPEED GUN CHECKING" name="ABNORMALITIES ON SPEED GUN CHECKING"min="0" required>
+
+        <label for="COUNCELLING AT LOBBY CONCERNED TO SAFETY(NO OF CREWS)">COUNSELLING AT LOBBY CONCERNED TO SAFETY(NO OF CREWS):</label>
+        <input type="number" id="COUNCELLING AT LOBBY CONCERNED TO SAFETY(NO OF CREWS)" name="COUNCELLING AT LOBBY CONCERNED TO SAFETY(NO OF CREWS)"min="0" required>
+        
+        <label for="CVVRS ANALYSIS(NO OF TRAINS)">CVVRS ANALYSIS(NO OF TRAINS):</label>
+        <input type="number" id="CVVRS ANALYSIS(NO OF TRAINS)" name="CVVRS ANALYSIS(NO OF TRAINS)"min="0" required>
+
+        <label for="ABNORMALITIES ON CVVRS ANALYSIS">ABNORMALITIES ON CVVRS ANALYSIS:</label>
+        <input type="number" id="ABNORMALITIES ON CVVRS ANALYSIS" name="ABNORMALITIES ON CVVRS ANALYSIS"min="0" required>
+        
+        <label for="SPM ANALYSIS(NO OF TRAINS)">SPM ANALYSIS(NO OF TRAINS):</label>
+        <input type="number" id="SPM ANALYSIS(NO OF TRAINS)" name="SPM ANALYSIS(NO OF TRAINS)"min="0" required>
+
+        <label for="ABNORMALITIES ON SPM ANALYSIS">ABNORMALITIES ON SPM ANALYSIS:</label>
+        <input type="number" id="ABNORMALITIES ON SPM ANALYSIS" name="ABNORMALITIES ON SPM ANALYSIS"min="0" required>
+
+        <label for="SHUNTING PROCEDURE & RULES INVOLVED AS PER GR 5.13">SHUNTING PROCEDURE & RULES INVOLVED AS PER GR 5.13:</label>
+        <input type="number" id="SHUNTING PROCEDURE & RULES INVOLVED AS PER GR 5.13" name="SHUNTING PROCEDURE & RULES INVOLVED AS PER GR 5.13"min="0" required>
+
+        <label for="COUNSELLING FOR PERSONAL SAFETY OF CREW">COUNSELLING FOR PERSONAL SAFETY OF CREW:</label>
+        <input type="number" id="COUNSELLING FOR PERSONAL SAFETY OF CREW" name="COUNSELLING FOR PERSONAL SAFETY OF CREW"min="0" required>
+
+        <label for="LONG HOURS DUTY OF CREW">LONG HOURS DUTY OF CREW:</label>
+        <input type="number" id="LONG HOURS DUTY OF CREW" name="LONG HOURS DUTY OF CREW"min="0" required>
+        
+        <label for="FAMILY/SAFETY SEMINAR">FAMILY/SAFETY SEMINAR:</label>
+        <input type="number" id="FAMILY/SAFETY SEMINAR" name="FAMILY/SAFETY SEMINAR"min="0" required>
+        
+        <label for="RUNNING ROOM INSPECTION">RUNNING ROOM INSPECTION:</label>
+        <input type="number" id="RUNNING ROOM INSPECTION" name="RUNNING ROOM INSPECTION"min="0" required>
+
+        <label for="ABNORMALITIES ON RUNNING ROOM INSPECTION">ABNORMALITIES ON RUNNING ROOM INSPECTION:</label>
+        <input type="number" id="ABNORMALITIES ON RUNNING ROOM INSPECTION" name="ABNORMALITIES ON RUNNING ROOM INSPECTION"min="0" required>
+        
+        <label for="LOBBY INSPECTION">LOBBY INSPECTION:</label>
+        <input type="number" id="LOBBY INSPECTION" name="LOBBY INSPECTION"min="0" required>
+
+        <label for="ABNORMALITIES ON LOBBY INSPECTION">ABNORMALITIES ON LOBBY INSPECTION:</label>
+        <input type="number" id="ABNORMALITIES ON LOBBY INSPECTION" name="ABNORMALITIES ON LOBBY INSPECTION"min="0" required>
+        
+        <label for="ABNORMALITIES DESCRIPTION RELATED ABOVE ALL FIELD IN DETAILS">ABNORMALITIES DESCRIPTION RELATED ABOVE ALL FIELD IN DETAILS:</label>
+        <textarea id="ABNORMALITIES DESCRIPTION RELATED ABOVE ALL FIELD IN DETAILS" name="ABNORMALITIES DESCRIPTION RELATED ABOVE ALL FIELD IN DETAILS"></textarea>
+        
+        <button id="submitButton" type="submit">SUBMIT</button>
+    </form>
+    <script src="Google sheet.js"></script>
+</body>
+</html>

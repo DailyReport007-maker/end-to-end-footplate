@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Duty Analysis</title>
+    <link rel="stylesheet" href="dailyreportanalysis.css">
+    <!-- Include Chart.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
+
+</head>
+<body>
+    <div class="container">
+        <h1>Duty Analysis</h1>
+
+        <form id="dutyForm">
+            <div class="form-group">
+                <label for="cliName">CLI NAME</label>
+                <select id="cliName">
+                    <!-- Options will be populated here -->
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="cliLobby">CLI LOBBY</label>
+                <select id="cliLobby">
+                    <!-- Options will be populated here -->
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="fromDate">FROM DATE</label>
+                <input type="date" id="fromDate">
+            </div>
+            <div class="form-group">
+                <label for="toDate">TO DATE</label>
+                <input type="date" id="toDate">
+            </div>
+            <div class="form-group">
+                <input type="submit" value="ANALYZE THE DUTY">
+            </div>
+        </form>
+
+        <div id="reportContainer">
+            <h2 id="reportHeading">DAILY REPORT ANALYSIS</h2>
+            <button id="printButton">Print Report</button>
+            <button id="pdfButton">Download PDF</button>
+            <table id="reportForm">
+                <thead>
+                    <tr>
+                        <th>PARAMETERS</th>
+                        <th>DONE</th>
+                        <th>ABNORMALITY</th>
+                    </tr>
+                </thead>
+                <tbody id="reportFormBody">
+                    <!-- Rows will be populated by JavaScript -->
+                </tbody>
+            </table>
+
+            <div class="chart-container">
+                <h2>Bar Graph</h2>
+                <canvas id="barGraphCanvas" class="canvas"></canvas>
+            </div>
+
+            <div class="chart-container">
+                <h2>Pie Chart</h2>
+                <canvas id="pieChartCanvas" class="canvas"></canvas>
+            </div>
+        </div> <!-- Close container div -->
+    </div>
+
+    <script src="dailyreportanalysis.js"></script>
+</body>
+</html>

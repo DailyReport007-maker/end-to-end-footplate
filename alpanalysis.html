@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALP End to End Footplate Analysis</title>
+    <link rel="stylesheet" href="lpanalysis.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>ALP End to End Footplate Analysis</h1>
+        <form id="dutyForm">
+            <label for="cliName">CLI NAME:</label>
+            <input id="cliName" name="cliName" list="cliNameList">
+            <datalist id="cliNameList">
+                <!-- Options will be populated by JavaScript -->
+            </datalist>
+            <br>
+            <label for="alpId">ALP ID:</label>
+            <input id="alpId" name="alpId" list="alpIdList">
+            <datalist id="alpIdList">
+                <!-- Options will be populated by JavaScript -->
+            </datalist>
+            <br>
+            <label for="fromDate">FROM DATE:</label>
+            <input type="date" id="fromDate" name="fromDate">
+            <br>
+            <label for="toDate">TO DATE:</label>
+            <input type="date" id="toDate" name="toDate">
+            <br>
+            <button type="submit">ANALYZE THE DUTY</button>
+        </form>
+        <button id="printReport" onclick="printReport()">Print Report</button>
+        <table id="reportTable">
+            <thead>
+                <tr>
+                    <th>CLI NAME</th>
+                    <th>ALP ID</th>
+                    <th>ALP NAME</th>
+                    <th>DESG</th>
+                    <th>HQ</th>
+                    <th>BEAT</th>
+                    <th>DATE</th>
+                </tr>
+            </thead>
+            <tbody id="reportFormBody">
+                <!-- Data will be populated by JavaScript -->
+            </tbody>
+        </table>
+    </div>
+    <script src="alpanalysis.js"></script>
+</body>
+</html>
