@@ -6,8 +6,42 @@
   <link rel="stylesheet" href="login.css">
   
   <title>Login</title>
+  <style>
+    /* Loading overlay styles */
+    #loadingOverlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+      display: none; /* Hidden by default */
+      justify-content: center;
+      align-items: center;
+      z-index: 1000; /* Ensure it's above other content */
+    }
+
+    /* Spinner styles */
+    .spinner {
+      border: 8px solid #f3f3f3; /* Light grey */
+      border-top: 8px solid #3498db; /* Blue */
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      animation: spin 2s linear infinite;
+    }
+
+    /* Spinner animation */
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
 </head>
 <body>
+  <div id="loadingOverlay">
+    <div class="spinner"></div>
+  </div>
   <form id="loginForm">
     <label for="cliName">CLI NAME:</label>
     <select id="cliName"name="cliName" required>
@@ -180,24 +214,33 @@
     
     <button type="submit">LOGIN</button>
   </form>
+
   <p id="responseMessage"></p>
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    $('#loginForm').submit(function(event) {
-        event.preventDefault(); // Form ke default submission ko prevent karta hai
-        var formData = $(this).serialize(); // Form data ko serialize karta hai
+  <script>
+    async function submitForm(event) {
+      event.preventDefault(); // Prevent default form submission
+      $('#loadingOverlay').show(); // Show loading overlay
+      
+      var formData = $('#loginForm').serialize(); // Serialize form data
+      
+      try {
+        const response = await $.post('https://script.google.com/macros/s/AKfycbworAciI1K11W1D5_YXF6wXTwzhm1Cve5Kbe51UPGCOUqwvTVzCd9tTKdno--a58VhwCg/exec', formData);
         
-        $.post('https://script.google.com/macros/s/AKfycbworAciI1K11W1D5_YXF6wXTwzhm1Cve5Kbe51UPGCOUqwvTVzCd9tTKdno--a58VhwCg/exec', formData, function(data) {
-            alert(data); // Server response ko alert karta hai
-            
-            // Agar login successful hai, toh redirect karo 'reportselection.html'
-            if (data === 'Login successful') {
-                window.location.href = 'reportselection.html';
-            }
-        });
-    });
-</script>
+        alert(response); // Show server response
+        
+        if (response === 'Login successful') {
+          window.location.href = 'reportselection.html';
+        }
+      } catch (error) {
+        alert('Error: ' + error.statusText);
+      } finally {
+        $('#loadingOverlay').hide(); // Hide loading overlay
+      }
+    }
 
+    $('#loginForm').submit(submitForm);
+  </script>
 </body>
 </html>
