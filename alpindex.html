@@ -32,46 +32,61 @@
             <input type="text" id="hq"name="HQ" readonly><br><br>
             
 
-        <label for="BEAT">BEAT:</label>
-        <select id="BEAT"name="BEAT" required>
-            <option value="">Select BEAT</option>
-            <option value="AKT-USL">AKT-USL</option>
-<option value="AKT-RIG">AKT-RIG</option>
-<option value="AKT-KRBA">AKT-KRBA</option>
-<option value="BSP-SDL">BSP-SDL</option>
-<option value="BSP-RIG">BSP-RIG</option>
-<option value="BSP-KRBA">BSP-KRBA</option>
-<option value="BSP-DBEC">BSP-DBEC</option>
-<option value="USL-NKJ">USL-NKJ</option>
-<option value="USL-DBEC">USL-DBEC</option>
-<option value="USL-RIG">USL-RIG</option>
-<option value="USL-KRBA">USL-KRBA</option>
-<option value="PND-BSP">PND-BSP</option>
-<option value="PND-NKJ">PND-NKJ</option>
-<option value="SDL-SGO">SDL-SGO</option>
-<option value="SDL-BSP">SDL-BSP</option>
-<option value="SDL-ABKP">SDL-ABKP</option>
-<option value="KHS-USL">KHS-USL</option>
-<option value="KHS-BRJN">KHS-BRJN</option>
-<option value="KHS-DMJY">KHS-DMJY</option>
-<option value="KHS-KRBA">KHS-KRBA</option>
-<option value="BRJN-ROU">BRJN-ROU</option>
-<option value="BRJN-RIG">BRJN-RIG</option>
-<option value="BRJN-SBP">BRJN-SBP</option>
-<option value="KRBA-DPK">KRBA-DPK</option>
-<option value="KRBA-USL">KRBA-USL</option>
-<option value="KRBA-RIG">KRBA-RIG</option>
-<option value="BJRI-ABKP">BJRI-ABKP</option>
-<option value="BJRI-BSP">BJRI-BSP</option>
-<option value="BJRI-NKJ">BJRI-NKJ</option>
-<option value="RIG-USL">RIG-USL</option>
-<option value="RIG-ROU">RIG-ROU</option>
-<option value="SJQ-ABKP-PSRS">SJQ-ABKP-PSRS</option>
-<option value="SJQ-SDL">SJQ-SDL</option>
-<option value="BSP-BJRI">BSP-BJRI</option>
-<option value="USL-RSD">USL-RSD</option>
-<option value="BSP-RSD">BSP-RSD</option>
-</select><br><br>
+            <label for="BEAT">BEAT:</label>
+            <select id="BEAT" name="BEAT" required>
+                <option value="">Select BEAT</option>
+                <option value="AKT-USL">AKT-USL</option>
+                <option value="AKT-RIG">AKT-RIG</option>
+                <option value="AKT-KRBA">AKT-KRBA</option>
+                <option value="BSP-SDL">BSP-SDL</option>
+                <option value="BSP-RIG">BSP-RIG</option>
+                <option value="BSP-KRBA">BSP-KRBA</option>
+                <option value="BSP-DBEC">BSP-DBEC</option>
+                <option value="USL-NKJ">USL-NKJ</option>
+                <option value="USL-DBEC">USL-DBEC</option>
+                <option value="USL-RIG">USL-RIG</option>
+                <option value="USL-KRBA">USL-KRBA</option>
+                <option value="PND-BSP">PND-BSP</option>
+                <option value="PND-NKJ">PND-NKJ</option>
+                <option value="SDL-SGO">SDL-SGO</option>
+                <option value="SDL-BSP">SDL-BSP</option>
+                <option value="SDL-NKJ">SDL-NKJ</option>
+                <option value="NKJ-SDL">NKJ-SDL</option>
+                <option value="SDL-BJRI">SDL-BJRI</option>
+                <option value="BJRI-SDL">BJRI-SDL</option>
+                <option value="SDL-ABKP">SDL-ABKP</option>
+                <option value="KHS-USL">KHS-USL</option>
+                <option value="KHS-BRJN">KHS-BRJN</option>
+                <option value="KHS-DMJY">KHS-DMJY</option>
+                <option value="KHS-KRBA">KHS-KRBA</option>
+                <option value="BRJN-ROU">BRJN-ROU</option>
+                <option value="BRJN-RIG">BRJN-RIG</option>
+                <option value="BRJN-SBP">BRJN-SBP</option>
+                <option value="KRBA-DPK">KRBA-DPK</option>
+                <option value="KRBA-USL">KRBA-USL</option>
+                <option value="KRBA-RIG">KRBA-RIG</option>
+                <option value="BJRI-ABKP">BJRI-ABKP</option>
+                <option value="BJRI-BSP">BJRI-BSP</option>
+                <option value="BJRI-NKJ">BJRI-NKJ</option>
+                <option value="RIG-USL">RIG-USL</option>
+                <option value="RIG-ROU">RIG-ROU</option>
+                <option value="SJQ-ABKP-PSRS">SJQ-ABKP-PSRS</option>
+                <option value="SJQ-SDL">SJQ-SDL</option>
+                <option value="BSP-BJRI">BSP-BJRI</option>
+                <option value="USL-RSD">USL-RSD</option>
+                <option value="BSP-RSD">BSP-RSD</option>
+                <option value="BSP-NGP">BSP-NGP</option>
+                <option value="BSP-CKP">BSP-CKP</option>
+                <option value="BSP-TATA">BSP-TATA</option>
+                <option value="BSP-ROU">BSP-ROU</option>
+                <option value="BSP-SBP">BSP-SBP</option>
+                <option value="OTHER">OTHER BEAT</option>
+            </select>
+            
+            <!-- Hidden input field for OTHER BEAT -->
+            <input type="text" id="otherBeatInput" name="otherBeat" placeholder="Enter other beat" style="display: none; margin-top: 10px;">
+            
+            <br><br>
 
 <label for="DATE">DATE:</label>
 <input type="date" id="DATE" name="DATE" required><br><br>
