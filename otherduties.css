@@ -1,0 +1,145 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: url('login page background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    height: 125vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+h2 {
+    text-align: center;
+    color: #0c0c0c;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+form {
+    max-width: 600px;
+    background: rgba(255, 255, 255, 0.85);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+form:hover {
+    transform: scale(1.05);
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #555;
+    font-weight: bold;
+}
+
+select,
+input[type="date"],
+input[type="time"],
+input[type="text"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+select:focus,
+input[type="date"]:focus,
+input[type="time"]:focus,
+input[type="text"]:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+input[type="time"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    box-sizing: border-box;
+    background: linear-gradient(to right, #e0eafc, #cfdef3); /* Gradient background */
+    color: #333; /* Text color */
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(0, 0, 0, 0.2); /* Inner and outer shadow */
+}
+
+input[type="time"]:focus {
+    border-color: #007bff;
+    outline: none;
+    background: linear-gradient(to right, #cfd9df, #e2ebf0); /* Lighter gradient on focus */
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2), 0 0 8px rgba(0, 123, 255, 0.6); /* Enhanced shadow on focus */
+    transition: background 0.3s ease, box-shadow 0.3s ease; /* Smooth transition effect */
+}
+
+
+button[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+button[type="submit"].loading {
+    background-color: #6c757d; /* Color when loading */
+    cursor: not-allowed; /* Show that button is disabled */
+}
+
+
+#otherDutiesInput {
+    display: none;
+}
+
+.select2-container .select2-selection--single {
+    height: 40px;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    line-height: 40px;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 40px;
+}
+
+@media (max-width: 600px) {
+    form {
+        padding: 15px;
+    }
+
+    h2 {
+        font-size: 1.5em;
+    }
+
+    label, 
+    select, 
+    input[type="date"], 
+    input[type="time"], 
+    input[type="text"], 
+    button[type="submit"] {
+        font-size: 14px;
+    }
+
+    select, 
+    input[type="date"], 
+    input[type="time"], 
+    input[type="text"] {
+        padding: 8px;
+    }
+}
