@@ -84,6 +84,27 @@ form {
     transform: scale(1.05);
 }
 
+#reportForm {
+    border-collapse: collapse; /* Ensures that table borders are combined into a single border */
+    width: 100%;
+    border: 2px solid black; /* Medium thick black border for the outer table */
+}
+
+#reportForm td, #reportForm th {
+    border: 2px solid black; /* Medium thick black borders for all cells */
+    padding: 8px;
+    text-align: left;
+}
+
+#reportForm tr:nth-child(even) {
+    background-color: #f2f2f2; /* Optional: Add background color for even rows */
+}
+
+#reportForm th {
+    background-color: #f61810; /* Optional: Add background color for header */
+    color: white;
+}
+
 /* Table Styling */
 table {
     width: 100%;

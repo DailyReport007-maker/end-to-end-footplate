@@ -116,8 +116,19 @@ function displayData(filteredData) {
         'LOBBY INSPECTION': 30
     };
 
+    const highlightParameters = [
+        'FOOTPLATE DURING WEE HOURS',
+        'FOOTPLATE EXCLUDING WEE HOURS',
+        'CVVRS ANALYSIS(NO OF TRAINS)',
+        'SPM ANALYSIS(NO OF TRAINS)',
+        'RUNNING ROOM INSPECTION',
+        'LOBBY INSPECTION'
+    ];
+
     const total = {};
     const abnormalities = {};
+    let totalDone = 0;
+    let totalAbnormalities = 0;
 
     filteredData.forEach(row => {
         Object.keys(parameters).forEach(param => {
@@ -125,6 +136,7 @@ function displayData(filteredData) {
             const value = parseInt(row[index], 10) || 0;
             if (!total[param]) total[param] = 0;
             total[param] += value;
+            totalDone += value;
         });
 
         Object.keys(abnormalityColumns).forEach(param => {
@@ -132,6 +144,7 @@ function displayData(filteredData) {
             const value = parseInt(row[index], 10) || 0;
             if (!abnormalities[param]) abnormalities[param] = 0;
             abnormalities[param] += value;
+            totalAbnormalities += value;
         });
     });
 
@@ -150,12 +163,45 @@ function displayData(filteredData) {
         abnormalityCell.textContent = abnormalities[param] || '0';
         newRow.appendChild(abnormalityCell);
 
+        // Highlight the specified parameters
+        if (highlightParameters.includes(param)) {
+            newRow.style.backgroundColor = 'lightgreen';
+        }
+
         tableBody.appendChild(newRow);
     });
+
+    // Add TOTAL row
+    const totalRow = document.createElement('tr');
+    const totalParamCell = document.createElement('td');
+    totalParamCell.textContent = 'TOTAL';
+    totalParamCell.style.fontWeight = 'bold';  // Make text bold
+    totalParamCell.style.backgroundColor = 'yellow';  // Background color yellow
+    totalRow.appendChild(totalParamCell);
+
+    const totalDoneCell = document.createElement('td');
+    totalDoneCell.textContent = totalDone || '0';
+    totalDoneCell.style.fontWeight = 'bold';  // Make text bold
+    totalDoneCell.style.backgroundColor = 'yellow';  // Background color yellow
+    totalRow.appendChild(totalDoneCell);
+
+    const totalAbnormalityCell = document.createElement('td');
+    totalAbnormalityCell.textContent = totalAbnormalities || '0';
+    totalAbnormalityCell.style.fontWeight = 'bold';  // Make text bold
+    totalAbnormalityCell.style.backgroundColor = 'yellow';  // Background color yellow
+    totalRow.appendChild(totalAbnormalityCell);
+
+    tableBody.appendChild(totalRow);
+
+    // Add border to the table
+    const table = document.getElementById('reportForm');
+    table.style.border = '2px solid black';  // Medium thick black border
 
     renderBarChart(total);
     renderPieChart(abnormalities);
 }
+
+
 
 function renderBarChart(total) {
     const ctx = document.getElementById('barGraphCanvas').getContext('2d');
@@ -298,15 +344,28 @@ function downloadPDF() {
         const cells = Array.from(row.children).map(cell => cell.textContent);
         y += lineHeight;
         
-        // Draw and fill each cell
-        pdf.rect(margin, y - lineHeight, colWidths[0], lineHeight);
-        pdf.text(cells[0], margin + 2, y - 2);
-        
-        pdf.rect(margin + colWidths[0], y - lineHeight, colWidths[1], lineHeight);
-        pdf.text(cells[1], margin + colWidths[0] + 2, y - 2);
-        
-        pdf.rect(margin + colWidths[0] + colWidths[1], y - lineHeight, colWidths[2], lineHeight);
-        pdf.text(cells[2], margin + colWidths[0] + colWidths[1] + 2, y - 2);
+        // Make TOTAL row bold and fill with yellow
+        if (cells[0] === 'TOTAL') {
+            pdf.setFont('helvetica', 'bold');
+            pdf.setFillColor(255, 255, 0);  // Yellow color for the background
+            pdf.rect(margin, y - lineHeight, colWidths[0], lineHeight, 'FD');
+            pdf.rect(margin + colWidths[0], y - lineHeight, colWidths[1], lineHeight, 'FD');
+            pdf.rect(margin + colWidths[0] + colWidths[1], y - lineHeight, colWidths[2], lineHeight, 'FD');
+            
+            pdf.text(cells[0], margin + 2, y - 2); // 'TOTAL' label
+            pdf.text(cells[1], margin + colWidths[0] + 2, y - 2); // 'done' value
+            pdf.text(cells[2], margin + colWidths[0] + colWidths[1] + 2, y - 2); // 'abnormality' value
+        } else {
+            pdf.setFont('helvetica', 'normal');
+            pdf.rect(margin, y - lineHeight, colWidths[0], lineHeight);
+            pdf.text(cells[0], margin + 2, y - 2);
+            
+            pdf.rect(margin + colWidths[0], y - lineHeight, colWidths[1], lineHeight);
+            pdf.text(cells[1], margin + colWidths[0] + 2, y - 2);
+            
+            pdf.rect(margin + colWidths[0] + colWidths[1], y - lineHeight, colWidths[2], lineHeight);
+            pdf.text(cells[2], margin + colWidths[0] + colWidths[1] + 2, y - 2);
+        }
     });
     
     // Save the PDF
