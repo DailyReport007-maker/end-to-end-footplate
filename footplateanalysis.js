@@ -8,15 +8,17 @@ document.addEventListener('DOMContentLoaded', function () {
     const reportDiv = document.getElementById('report');
     const detailsDiv = document.getElementById('details');
     const detailsTableBody = document.querySelector('#details-table tbody');
+    const downloadExcelBtn = document.getElementById('download-excel-btn');
 
-    // Google Sheet Details
+    // Google Sheet Details (If applicable)
     const sheetId = '1fHSnNcPxryFY1JP2or3ZzqC4tO2qe6E1-VJ2-UX_nrQ';
     const apiKey = 'AIzaSyAw23pJz0K9fZb2rRRAe2C2cJDilRc0Kac';
     const sheetName = 'END TO END FOOTPLATE';
 
     let cliData = {};
+    let reportData = [];
 
-    // Load CLI options from CLI.csv file
+    // Load CLI options and details from CSV file
     fetch('CLI.csv')
         .then(response => response.text())
         .then(csvText => {
@@ -26,17 +28,18 @@ document.addEventListener('DOMContentLoaded', function () {
             rows.forEach((row, index) => {
                 if (index > 0 && row) { // Skip the header row
                     const columns = row.split(',');
-                    const cliName = columns[0].trim();
+                    const cliName = columns[0].trim();  // Fetch CLI Name
                     const lpId = columns[1].trim();
                     const lpName = columns[2].trim();
                     const desg = columns[3].trim();
                     const hq = columns[4].trim();
 
+                    // Store LP details under the corresponding CLI Name
                     if (!cliData[cliName]) {
                         cliData[cliName] = [];
                     }
 
-                    cliData[cliName].push({ lpId, lpName, desg, hq });
+                    cliData[cliName].push({ cliName, lpId, lpName, desg, hq });
 
                     if (cliName) {
                         uniqueCliNames.add(cliName);
@@ -44,6 +47,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             });
 
+            // Populate the CLI dropdown with options
             uniqueCliNames.forEach(cliName => {
                 const option = document.createElement('option');
                 option.value = cliName;
@@ -156,6 +160,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const lpNotDoneCount = cliLpIds.length;
 
                 generateReport(cliName, lpNotDoneCount, cliLpIds);
+                reportData = cliLpIds; // Store the report data for Excel generation
             })
             .catch(error => {
                 console.error('Error fetching data:', error);
@@ -173,6 +178,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         reportDiv.style.display = 'block';
+        downloadExcelBtn.style.display = 'block';  // Show the download button after report is generated
     }
 
     function populateDetailsTable(lpDetails) {
@@ -185,10 +191,24 @@ document.addEventListener('DOMContentLoaded', function () {
                 <td>${lp.lpName}</td>
                 <td>${lp.desg}</td>
                 <td>${lp.hq}</td>
+                <td>${lp.cliName}</td>  <!-- CLI Name from CSV -->
             `;
             detailsTableBody.appendChild(row);
         });
 
         detailsDiv.classList.remove('hidden');
     }
+
+    // Handle Excel download
+    downloadExcelBtn.addEventListener('click', function () {
+        if (reportData.length > 0) {
+            const worksheet = XLSX.utils.json_to_sheet(reportData);
+            const workbook = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(workbook, worksheet, 'Report');
+
+            XLSX.writeFile(workbook, 'Report.xlsx');
+        } else {
+            alert('No data available to download.');
+        }
+    });
 });

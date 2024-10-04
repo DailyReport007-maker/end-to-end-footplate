@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CLI Analysis Form</title>
     <link rel="stylesheet" href="footplateanalysis.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+
 </head>
 
 <body>
@@ -44,6 +46,8 @@
             <input type="date" id="to-date" name="to-date" readonly>
 
             <button type="button" id="analyze-btn">ANALYSIS</button>
+            <button type="button" id="download-excel-btn" style="display:none;">Download Excel Report</button>
+
         </form>
 
         <div id="report">
@@ -59,8 +63,10 @@
                         <th>LP Name</th>
                         <th>Designation</th>
                         <th>HQ</th>
+                        <th>CLI Name</th> <!-- Adding CLI Name header -->
                     </tr>
                 </thead>
+                
                 <tbody>
                     <!-- Details will be populated here dynamically -->
                 </tbody>
