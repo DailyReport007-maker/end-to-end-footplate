@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const quarterEndDates = {
                     1: '2024-03-31',
                     2: '2024-06-30',
-                    3: '2024-09-30',
+                    3: '2024-10-05',
                     4: '2024-12-31',
                     5: '2025-03-31'
                 };
