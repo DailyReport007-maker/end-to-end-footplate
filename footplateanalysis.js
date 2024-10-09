@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const detailsTableBody = document.querySelector('#details-table tbody');
     const downloadExcelBtn = document.getElementById('download-excel-btn');
 
-    // Google Sheet Details (If applicable)
+    // Google Sheet Details
     const sheetId = '1fHSnNcPxryFY1JP2or3ZzqC4tO2qe6E1-VJ2-UX_nrQ';
     const apiKey = 'AIzaSyAw23pJz0K9fZb2rRRAe2C2cJDilRc0Kac';
     const sheetName = 'END TO END FOOTPLATE';
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function () {
             rows.forEach((row, index) => {
                 if (index > 0 && row) { // Skip the header row
                     const columns = row.split(',');
-                    const cliName = columns[0].trim();  // Fetch CLI Name
+                    const cliName = columns[0].trim(); 
                     const lpId = columns[1].trim();
                     const lpName = columns[2].trim();
                     const desg = columns[3].trim();
@@ -40,10 +40,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
 
                     cliData[cliName].push({ cliName, lpId, lpName, desg, hq });
-
-                    if (cliName) {
-                        uniqueCliNames.add(cliName);
-                    }
+                    uniqueCliNames.add(cliName);
                 }
             });
 
@@ -133,7 +130,12 @@ document.addEventListener('DOMContentLoaded', function () {
             alert('Please fill all fields.');
         }
     });
-
+    function formatDate(dateString) {
+        if (!dateString || dateString === 'N/A') return 'N/A';
+        const dateParts = dateString.split('-');
+        return `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`; // Converts to dd-mm-yyyy
+    }
+    
     function analyzeData(cliName, fromDate, toDate) {
         const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${sheetName}?key=${apiKey}`;
     
@@ -143,9 +145,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 const rows = data.values;
                 let cliLpIds = cliName === 'ALL' ? [].concat(...Object.values(cliData)) : cliData[cliName] || [];
     
-                // Data structure to store all sheet data (needed to fetch last available info if outside the selected period)
-                const sheetData = {};
+                const latestData = {}; // Store the latest entry for each LP ID
     
+                // Step 1: Iterate over the entire sheet to find the latest entry for each LP ID
                 rows.forEach((row, index) => {
                     if (index > 0 && row.length > 0) { // Skip the header row
                         const sheetCliName = row[0]?.trim();
@@ -154,25 +156,26 @@ document.addEventListener('DOMContentLoaded', function () {
                         const beat = row[5]?.trim();
                         const grade = row[7]?.trim(); // LP GRADE
     
-                        // Store all data for later use (for LP IDs outside the selected period)
-                        if (!sheetData[lpId]) {
-                            sheetData[lpId] = { lastFootplateDate, beat, grade };
-                        }
+                        if (lpId && (cliName === 'ALL' || sheetCliName === cliName)) {
+                            // Keep only the latest entry for each LP ID
+                            if (!latestData[lpId] || new Date(lastFootplateDate) > new Date(latestData[lpId].lastFootplateDate)) {
+                                latestData[lpId] = { lastFootplateDate, beat, grade };
+                            }
     
-                        // Remove LP IDs that have entries within the selected period
-                        if ((cliName === 'ALL' || sheetCliName === cliName) &&
-                            new Date(lastFootplateDate) >= new Date(fromDate) &&
-                            new Date(lastFootplateDate) <= new Date(toDate)) {
-                            cliLpIds = cliLpIds.filter(lp => lp.lpId !== lpId);  // Exclude this LP
+                            // Step 2: Remove LP IDs that have data within the selected period
+                            if (new Date(lastFootplateDate) >= new Date(fromDate) &&
+                                new Date(lastFootplateDate) <= new Date(toDate)) {
+                                cliLpIds = cliLpIds.filter(lp => lp.lpId !== lpId);
+                            }
                         }
                     }
                 });
     
-                // For LP IDs with no entry in the selected period, get the latest available data
+                // Step 3: Prepare the report data for LP IDs not having data in the selected period
                 const lpDetails = cliLpIds.map(lp => {
-                    const sheetEntry = sheetData[lp.lpId] || {};
+                    const sheetEntry = latestData[lp.lpId] || {}; // Get latest entry, or empty if no data exists
     
-                    let lastFootplateDone = sheetEntry.lastFootplateDate || 'N/A';
+                    let lastFootplateDone = sheetEntry.lastFootplateDate ? formatDate(sheetEntry.lastFootplateDate) : 'N/A';
                     let beat = sheetEntry.beat || 'N/A';
                     let dueDate = 'N/A';
     
@@ -261,17 +264,25 @@ document.addEventListener('DOMContentLoaded', function () {
         detailsDiv.classList.remove('hidden');
     }
     
-
-    // Handle Excel download
     downloadExcelBtn.addEventListener('click', function () {
-        if (reportData.length > 0) {
-            const worksheet = XLSX.utils.json_to_sheet(reportData);
-            const workbook = XLSX.utils.book_new();
-            XLSX.utils.book_append_sheet(workbook, worksheet, 'Report');
-
-            XLSX.writeFile(workbook, 'Report.xlsx');
-        } else {
-            alert('No data available to download.');
-        }
+        // Prepare data for Excel
+        const worksheetData = [
+            ['CLI Name', 'LP ID', 'LP Name', 'Designation', 'HQ', 'Last Footplate Done', 'Beat', 'Due Date'],  // Header row
+            ...reportData.map(lp => [
+                lp.cliName, lp.lpId, lp.lpName, lp.desg, lp.hq, 
+                lp.lastFootplateDone, lp.beat, lp.dueDate
+            ])
+        ];
+    
+        // Create a new workbook and worksheet
+        const wb = XLSX.utils.book_new();
+        const ws = XLSX.utils.aoa_to_sheet(worksheetData);
+    
+        // Append the worksheet to the workbook
+        XLSX.utils.book_append_sheet(wb, ws, 'Report');
+    
+        // Generate Excel file and trigger download
+        XLSX.writeFile(wb, 'report.xlsx');
     });
+    
 });
