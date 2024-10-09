@@ -136,54 +136,113 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function analyzeData(cliName, fromDate, toDate) {
         const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${sheetName}?key=${apiKey}`;
-
+    
         fetch(url)
             .then(response => response.json())
             .then(data => {
                 const rows = data.values;
                 let cliLpIds = cliName === 'ALL' ? [].concat(...Object.values(cliData)) : cliData[cliName] || [];
-
+    
+                // Data structure to store all sheet data (needed to fetch last available info if outside the selected period)
+                const sheetData = {};
+    
                 rows.forEach((row, index) => {
                     if (index > 0 && row.length > 0) { // Skip the header row
-                        const sheetCliName = row[0].trim();
-                        const lpId = row[1].trim();
-                        const date = row[6].trim();
-
+                        const sheetCliName = row[0]?.trim();
+                        const lpId = row[1]?.trim();
+                        const lastFootplateDate = row[6]?.trim(); // LAST FOOTPLATE DONE DATE
+                        const beat = row[5]?.trim();
+                        const grade = row[7]?.trim(); // LP GRADE
+    
+                        // Store all data for later use (for LP IDs outside the selected period)
+                        if (!sheetData[lpId]) {
+                            sheetData[lpId] = { lastFootplateDate, beat, grade };
+                        }
+    
+                        // Remove LP IDs that have entries within the selected period
                         if ((cliName === 'ALL' || sheetCliName === cliName) &&
-                            new Date(date) >= new Date(fromDate) &&
-                            new Date(date) <= new Date(toDate)) {
-                            cliLpIds = cliLpIds.filter(lp => lp.lpId !== lpId);
+                            new Date(lastFootplateDate) >= new Date(fromDate) &&
+                            new Date(lastFootplateDate) <= new Date(toDate)) {
+                            cliLpIds = cliLpIds.filter(lp => lp.lpId !== lpId);  // Exclude this LP
                         }
                     }
                 });
-
-                const lpNotDoneCount = cliLpIds.length;
-
-                generateReport(cliName, lpNotDoneCount, cliLpIds);
-                reportData = cliLpIds; // Store the report data for Excel generation
+    
+                // For LP IDs with no entry in the selected period, get the latest available data
+                const lpDetails = cliLpIds.map(lp => {
+                    const sheetEntry = sheetData[lp.lpId] || {};
+    
+                    let lastFootplateDone = sheetEntry.lastFootplateDate || 'N/A';
+                    let beat = sheetEntry.beat || 'N/A';
+                    let dueDate = 'N/A';
+    
+                    if (lastFootplateDone !== 'N/A' && sheetEntry.grade) {
+                        dueDate = calculateDueDate(lastFootplateDone, sheetEntry.grade);
+                    }
+    
+                    return {
+                        ...lp,  // Include lpName, desg, hq, cliName from CSV
+                        lastFootplateDone,
+                        beat,
+                        dueDate
+                    };
+                });
+    
+                const lpNotDoneCount = lpDetails.length;
+    
+                generateReport(cliName, lpNotDoneCount, lpDetails);
+                reportData = lpDetails; // Store the report data for Excel generation
             })
             .catch(error => {
                 console.error('Error fetching data:', error);
             });
     }
-
+    
+    function calculateDueDate(lastFootplateDate, grade) {
+        const dateParts = lastFootplateDate.split('-'); // Expecting dd-mm-yyyy
+        const lastDate = new Date(`${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`); // Convert to yyyy-mm-dd
+        if (isNaN(lastDate.getTime())) {
+            console.error('Invalid last footplate date:', lastFootplateDate);
+            return 'N/A'; // Return N/A if the date is invalid
+        }
+    
+        let dueDate;
+    
+        switch (grade) {
+            case 'A':
+                dueDate = new Date(lastDate.setDate(lastDate.getDate() + 90));
+                break;
+            case 'B':
+                dueDate = new Date(lastDate.setDate(lastDate.getDate() + 60));
+                break;
+            case 'C':
+                dueDate = new Date(lastDate.setDate(lastDate.getDate() + 30));
+                break;
+            default:
+                dueDate = 'N/A';
+        }
+    
+        // Return the due date in dd-mm-yyyy format
+        return dueDate === 'N/A' ? 'N/A' : formatDate(`${dueDate.getDate().toString().padStart(2, '0')}-${(dueDate.getMonth() + 1).toString().padStart(2, '0')}-${dueDate.getFullYear()}`);
+    }
+    
     function generateReport(cliName, lpNotDoneCount, lpDetails) {
         reportDiv.innerHTML = `
             <h2>Report for ${cliName}</h2>
             <p>Number of LPs not done End to End Footplate: <span id="lp-count">${lpNotDoneCount}</span></p>
         `;
-
+    
         document.getElementById('lp-count').addEventListener('click', function () {
             populateDetailsTable(lpDetails);
         });
-
+    
         reportDiv.style.display = 'block';
         downloadExcelBtn.style.display = 'block';  // Show the download button after report is generated
     }
-
+    
     function populateDetailsTable(lpDetails) {
         detailsTableBody.innerHTML = ''; // Clear previous details
-
+    
         lpDetails.forEach(lp => {
             const row = document.createElement('tr');
             row.innerHTML = `
@@ -191,13 +250,17 @@ document.addEventListener('DOMContentLoaded', function () {
                 <td>${lp.lpName}</td>
                 <td>${lp.desg}</td>
                 <td>${lp.hq}</td>
-                <td>${lp.cliName}</td>  <!-- CLI Name from CSV -->
+                <td>${lp.cliName}</td>
+                <td>${lp.lastFootplateDone}</td>
+                <td>${lp.beat}</td>
+                <td>${lp.dueDate}</td>
             `;
             detailsTableBody.appendChild(row);
         });
-
+    
         detailsDiv.classList.remove('hidden');
     }
+    
 
     // Handle Excel download
     downloadExcelBtn.addEventListener('click', function () {

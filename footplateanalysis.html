@@ -7,7 +7,6 @@
     <title>CLI Analysis Form</title>
     <link rel="stylesheet" href="footplateanalysis.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
-
 </head>
 
 <body>
@@ -29,15 +28,13 @@
             </select>
 
             <label for="quarterly-period">Quarterly Period:</label>
-              <div id="quarterly-period">
-                 <label><input type="checkbox" class="quarter-checkbox" value="1"> FIRST QUARTER</label>
-                 <label><input type="checkbox" class="quarter-checkbox" value="2"> SECOND QUARTER</label>
-                 <label><input type="checkbox" class="quarter-checkbox" value="3"> THIRD QUARTER</label>
-                 <label><input type="checkbox" class="quarter-checkbox" value="4"> FOURTH QUARTER</label>
-                 <label><input type="checkbox" class="quarter-checkbox" value="5"> FIFTH QUARTER</label>
-                </div>
-
-
+            <div id="quarterly-period">
+                <label><input type="checkbox" class="quarter-checkbox" value="1"> FIRST QUARTER</label>
+                <label><input type="checkbox" class="quarter-checkbox" value="2"> SECOND QUARTER</label>
+                <label><input type="checkbox" class="quarter-checkbox" value="3"> THIRD QUARTER</label>
+                <label><input type="checkbox" class="quarter-checkbox" value="4"> FOURTH QUARTER</label>
+                <label><input type="checkbox" class="quarter-checkbox" value="5"> FIFTH QUARTER</label>
+            </div>
 
             <label for="from-date">From Date:</label>
             <input type="date" id="from-date" name="from-date">
@@ -47,7 +44,6 @@
 
             <button type="button" id="analyze-btn">ANALYSIS</button>
             <button type="button" id="download-excel-btn" style="display:none;">Download Excel Report</button>
-
         </form>
 
         <div id="report">
@@ -63,10 +59,12 @@
                         <th>LP Name</th>
                         <th>Designation</th>
                         <th>HQ</th>
-                        <th>CLI Name</th> <!-- Adding CLI Name header -->
+                        <th>CLI Name</th>
+                        <th>LAST FOOTPLATE DATE(DD-MM-YYYY)</th>
+                        <th>BEAT</th>
+                        <th>DUE DATE(YYYY-MM-DD)</th>
                     </tr>
                 </thead>
-                
                 <tbody>
                     <!-- Details will be populated here dynamically -->
                 </tbody>
@@ -74,7 +72,7 @@
         </div>
     </div>
 
-    <script src="footplateanalysis.js"></script>
+    <script src="test.js"></script>
 </body>
 
 </html>
