@@ -11,15 +11,15 @@ document.addEventListener('DOMContentLoaded', function () {
     const downloadExcelBtn = document.getElementById('download-excel-btn');
 
     // Google Sheet Details
-    const sheetId = '1fHSnNcPxryFY1JP2or3ZzqC4tO2qe6E1-VJ2-UX_nrQ';
+    const sheetId = '1wb-xTJB4uM85A7V7aHoWJuXbRn0obxnqaFrvQJpPZi4';
     const apiKey = 'AIzaSyAw23pJz0K9fZb2rRRAe2C2cJDilRc0Kac';
-    const sheetName = 'END TO END FOOTPLATE';
+    const sheetName = 'ALP END TO END';
 
     let cliData = {};
     let reportData = [];
 
     // Load CLI options and details from CSV file
-    fetch('CLI.csv')
+    fetch('CLIALP.csv')
         .then(response => response.text())
         .then(csvText => {
             const rows = csvText.split('\n');
@@ -130,104 +130,94 @@ document.addEventListener('DOMContentLoaded', function () {
             alert('Please fill all fields.');
         }
     });
-    function formatDate(dateString) {
-        if (!dateString || dateString === 'N/A') return 'N/A';
-        const dateParts = dateString.split('-');
-        return `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`; // Converts to dd-mm-yyyy
-    }
-    
-    function analyzeData(cliName, fromDate, toDate) {
-        const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${sheetName}?key=${apiKey}`;
-    
-        fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                const rows = data.values;
-                let cliLpIds = cliName === 'ALL' ? [].concat(...Object.values(cliData)) : cliData[cliName] || [];
-    
-                const latestData = {}; // Store the latest entry for each LP ID
-    
-                // Step 1: Iterate over the entire sheet to find the latest entry for each LP ID
-                rows.forEach((row, index) => {
-                    if (index > 0 && row.length > 0) { // Skip the header row
-                        const sheetCliName = row[0]?.trim();
-                        const lpId = row[1]?.trim();
-                        const lastFootplateDate = row[6]?.trim(); // LAST FOOTPLATE DONE DATE
-                        const beat = row[5]?.trim();
-                        const grade = row[7]?.trim(); // LP GRADE
-    
-                        if (lpId && (cliName === 'ALL' || sheetCliName === cliName)) {
-                            // Keep only the latest entry for each LP ID
-                            if (!latestData[lpId] || new Date(lastFootplateDate) > new Date(latestData[lpId].lastFootplateDate)) {
-                                latestData[lpId] = { lastFootplateDate, beat, grade };
-                            }
-    
-                            // Step 2: Remove LP IDs that have data within the selected period
-                            if (new Date(lastFootplateDate) >= new Date(fromDate) &&
-                                new Date(lastFootplateDate) <= new Date(toDate)) {
-                                cliLpIds = cliLpIds.filter(lp => lp.lpId !== lpId);
-                            }
+    // Function to format date from yyyy-mm-dd to dd-mm-yyyy
+function formatDate(dateString) {
+    if (!dateString || dateString === 'N/A') return 'N/A';
+    const dateParts = dateString.split('-');
+    return `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`; // Converts to dd-mm-yyyy
+}
+
+function analyzeData(cliName, fromDate, toDate) {
+    const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${sheetName}?key=${apiKey}`;
+
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            const rows = data.values;
+            let cliLpIds = cliName === 'ALL' ? [].concat(...Object.values(cliData)) : cliData[cliName] || [];
+
+            const latestData = {}; // Store the latest entry for each LP ID
+
+            // Step 1: Iterate over the entire sheet to find the latest entry for each LP ID
+            rows.forEach((row, index) => {
+                if (index > 0 && row.length > 0) { // Skip the header row
+                    const sheetCliName = row[0]?.trim();
+                    const lpId = row[1]?.trim();
+                    const lastFootplateDate = row[6]?.trim(); // LAST FOOTPLATE DONE DATE
+                    const beat = row[5]?.trim();
+
+                    if (lpId && (cliName === 'ALL' || sheetCliName === cliName)) {
+                        // Keep only the latest entry for each LP ID
+                        if (!latestData[lpId] || new Date(lastFootplateDate) > new Date(latestData[lpId].lastFootplateDate)) {
+                            latestData[lpId] = { lastFootplateDate, beat };
+                        }
+
+                        // Step 2: Remove LP IDs that have data within the selected period
+                        if (new Date(lastFootplateDate) >= new Date(fromDate) &&
+                            new Date(lastFootplateDate) <= new Date(toDate)) {
+                            cliLpIds = cliLpIds.filter(lp => lp.lpId !== lpId);
                         }
                     }
-                });
-    
-                // Step 3: Prepare the report data for LP IDs not having data in the selected period
-                const lpDetails = cliLpIds.map(lp => {
-                    const sheetEntry = latestData[lp.lpId] || {}; // Get latest entry, or empty if no data exists
-    
-                    let lastFootplateDone = sheetEntry.lastFootplateDate ? formatDate(sheetEntry.lastFootplateDate) : 'N/A';
-                    let beat = sheetEntry.beat || 'N/A';
-                    let dueDate = 'N/A';
-    
-                    if (lastFootplateDone !== 'N/A' && sheetEntry.grade) {
-                        dueDate = calculateDueDate(lastFootplateDone, sheetEntry.grade);
-                    }
-    
-                    return {
-                        ...lp,  // Include lpName, desg, hq, cliName from CSV
-                        lastFootplateDone,
-                        beat,
-                        dueDate
-                    };
-                });
-    
-                const lpNotDoneCount = lpDetails.length;
-    
-                generateReport(cliName, lpNotDoneCount, lpDetails);
-                reportData = lpDetails; // Store the report data for Excel generation
-            })
-            .catch(error => {
-                console.error('Error fetching data:', error);
+                }
             });
+
+            // Step 3: Prepare the report data for LP IDs not having data in the selected period
+            const lpDetails = cliLpIds.map(lp => {
+                const sheetEntry = latestData[lp.lpId] || {}; // Get latest entry, or empty if no data exists
+
+                let lastFootplateDone = sheetEntry.lastFootplateDate ? formatDate(sheetEntry.lastFootplateDate) : 'N/A';
+                let beat = sheetEntry.beat || 'N/A';
+                let dueDate = 'N/A';
+
+                // For all entries, calculate 30-day due date from the last footplate date
+                if (lastFootplateDone !== 'N/A') {
+                    dueDate = calculateDueDate(lastFootplateDone);
+                }
+
+                return {
+                    ...lp,  // Include lpName, desg, hq, cliName from CSV
+                    lastFootplateDone,
+                    beat,
+                    dueDate
+                };
+            });
+
+            const lpNotDoneCount = lpDetails.length;
+
+            generateReport(cliName, lpNotDoneCount, lpDetails);
+            reportData = lpDetails; // Store the report data for Excel generation
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+        });
+}
+
+function calculateDueDate(lastFootplateDate) {
+    const dateParts = lastFootplateDate.split('-'); // Expecting dd-mm-yyyy
+    const lastDate = new Date(`${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`); // Convert to yyyy-mm-dd
+    if (isNaN(lastDate.getTime())) {
+        console.error('Invalid last footplate date:', lastFootplateDate);
+        return 'N/A'; // Return N/A if the date is invalid
     }
+
+    // Always calculate 30 days for all entries
+    const dueDate = new Date(lastDate.setDate(lastDate.getDate() + 30));
+
+    // Return the due date in dd-mm-yyyy format
+    return formatDate(`${dueDate.getDate().toString().padStart(2, '0')}-${(dueDate.getMonth() + 1).toString().padStart(2, '0')}-${dueDate.getFullYear()}`);
+}
+
     
-    function calculateDueDate(lastFootplateDate, grade) {
-        const dateParts = lastFootplateDate.split('-'); // Expecting dd-mm-yyyy
-        const lastDate = new Date(`${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`); // Convert to yyyy-mm-dd
-        if (isNaN(lastDate.getTime())) {
-            console.error('Invalid last footplate date:', lastFootplateDate);
-            return 'N/A'; // Return N/A if the date is invalid
-        }
-    
-        let dueDate;
-    
-        switch (grade) {
-            case 'A':
-                dueDate = new Date(lastDate.setDate(lastDate.getDate() + 90));
-                break;
-            case 'B':
-                dueDate = new Date(lastDate.setDate(lastDate.getDate() + 60));
-                break;
-            case 'C':
-                dueDate = new Date(lastDate.setDate(lastDate.getDate() + 30));
-                break;
-            default:
-                dueDate = 'N/A';
-        }
-    
-        // Return the due date in dd-mm-yyyy format
-        return dueDate === 'N/A' ? 'N/A' : formatDate(`${dueDate.getDate().toString().padStart(2, '0')}-${(dueDate.getMonth() + 1).toString().padStart(2, '0')}-${dueDate.getFullYear()}`);
-    }
     
     function generateReport(cliName, lpNotDoneCount, lpDetails) {
         reportDiv.innerHTML = `
@@ -289,7 +279,7 @@ document.addEventListener('DOMContentLoaded', function () {
     downloadExcelBtn.addEventListener('click', function () {
         // Prepare data for Excel
         const worksheetData = [
-            ['CLI Name', 'LP ID', 'LP Name', 'Designation', 'HQ', 'Last Footplate Done', 'Beat', 'Due Date'],  // Header row
+            ['CLI Name', 'ALP ID', 'ALP Name', 'Designation', 'HQ', 'Last Footplate Done', 'Beat', 'Due Date'],  // Header row
             ...reportData.map(lp => [
                 lp.cliName, lp.lpId, lp.lpName, lp.desg, lp.hq, 
                 lp.lastFootplateDone, lp.beat, lp.dueDate

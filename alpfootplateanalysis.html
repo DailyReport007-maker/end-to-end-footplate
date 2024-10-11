@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CLI Analysis Form</title>
+    <link rel="stylesheet" href="footplateanalysis.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+</head>
+
+<body>
+    <div class="form-container">
+        <h1>CLI FOOTPLATE ANALYSIS</h1>
+        <form id="cli-form">
+            <label for="cli-name">CLI Name:</label>
+            <select id="cli-name" name="cli-name">
+                <option value="ALL">ALL</option>
+                <!-- Options dynamically populated by JavaScript -->
+            </select>
+
+            <label for="period">Period:</label>
+            <select id="period" name="period">
+                <option value="MONTHLY">MONTHLY</option>
+                <option value="QUARTERLY">QUARTERLY</option>
+                <option value="HALFYEARLY">HALFYEARLY</option>
+                <option value="YEARLY">YEARLY</option>
+            </select>
+
+            <label for="quarterly-period">Quarterly Period:</label>
+            <div id="quarterly-period">
+                <label><input type="checkbox" class="quarter-checkbox" value="1"> FIRST QUARTER</label>
+                <label><input type="checkbox" class="quarter-checkbox" value="2"> SECOND QUARTER</label>
+                <label><input type="checkbox" class="quarter-checkbox" value="3"> THIRD QUARTER</label>
+                <label><input type="checkbox" class="quarter-checkbox" value="4"> FOURTH QUARTER</label>
+                <label><input type="checkbox" class="quarter-checkbox" value="5"> FIFTH QUARTER</label>
+            </div>
+
+            <label for="from-date">From Date:</label>
+            <input type="date" id="from-date" name="from-date">
+
+            <label for="to-date">To Date:</label>
+            <input type="date" id="to-date" name="to-date" readonly>
+
+            <button type="button" id="analyze-btn">ANALYSIS</button>
+            <button type="button" id="download-excel-btn" style="display:none;">Download Excel Report</button>
+        </form>
+
+        <div id="report">
+            <!-- Report will be generated here -->
+        </div>
+
+        <div id="details" class="hidden">
+            <h2>LP Details</h2>
+            <table id="details-table">
+                <thead>
+                    <tr>
+                        <th>ALP ID</th>
+                        <th>ALP Name</th>
+                        <th>Designation</th>
+                        <th>HQ</th>
+                        <th>CLI Name</th>
+                        <th>LAST FOOTPLATE DATE(DD-MM-YYYY)</th>
+                        <th>BEAT</th>
+                        <th>DUE DATE(YYYY-MM-DD)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Details will be populated here dynamically -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="alpfootplateanalysis.js"></script>
+</body>
+
+</html>

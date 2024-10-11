@@ -15,8 +15,8 @@ body {
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    overflow: hidden; /* Ensure content doesn't overflow */
-    position: relative; /* For absolute positioning of form */
+    overflow: hidden;
+    position: relative;
 }
 
 /* Title Styles */
@@ -38,10 +38,9 @@ form {
     padding: 20px;
     border-radius: 10px;
     box-sizing: border-box;
-    overflow-y: auto; /* Enable vertical scrolling */
+    overflow-y: auto;
 }
 
-/* Form elements */
 label {
     display: block;
     margin-bottom: 8px;
@@ -74,7 +73,7 @@ button:hover {
     transform: scale(1.05);
 }
 
-/* Report Styles */
+/* Report Styles - Add horizontal scroll for mobile */
 #report {
     margin-top: 20px;
     padding: 20px;
@@ -83,23 +82,7 @@ button:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     background-color: #f9f9f9;
     display: none;
-}
-
-#report h2 {
-    margin-top: 0;
-    color: #333;
-    font-size: 20px;
-}
-
-#report p {
-    font-size: 18px;
-    color: #555;
-}
-
-#report #lp-count {
-    font-weight: bold;
-    color: #4CAF50;
-    cursor: pointer;
+    overflow-x: auto; /* Allow horizontal scroll */
 }
 
 /* Details Styles */
@@ -110,17 +93,13 @@ button:hover {
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     background-color: #f9f9f9;
-}
-
-#details h2 {
-    margin-top: 0;
-    color: #333;
-    font-size: 20px;
+    overflow-x: auto; /* Allow horizontal scroll */
 }
 
 #details-table {
     width: 100%;
     border-collapse: collapse;
+    min-width: 800px; /* Ensure a minimum width for table */
 }
 
 #details-table th, #details-table td {
@@ -190,4 +169,44 @@ button:hover {
         border: 1px solid #ddd;
         padding: 8px;
     }
+}
+
+/* Custom styles for row highlighting */
+.overdue-row {
+    background-color: #ff9999; /* Red for overdue */
+}
+
+.warning-row {
+    background-color: #d1c4e9; /* Purple for 10 days before due date */
+}
+.legend {
+    margin-top: 15px;
+    font-size: 16px;
+}
+
+.legend-box {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    margin-right: 10px;
+    border-radius: 3px; /* Rounded corners */
+}
+
+.purple {
+    background-color: purple;
+}
+
+.red {
+    background-color: red;
+}
+.highlighted {
+    font-weight: bold;
+    color: #4CAF50; /* Change the color to a brighter shade */
+    cursor: pointer; /* Change cursor to pointer */
+    text-decoration: underline; /* Add underline for emphasis */
+    transition: transform 0.3s ease; /* Add a transition effect */
+}
+
+.highlighted:hover {
+    transform: scale(1.1); /* Scale up on hover */
 }
