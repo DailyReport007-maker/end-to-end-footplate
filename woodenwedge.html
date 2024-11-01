@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>END TO END FOOTPLATE</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+</head>
+<body>
+    <div class="form-container">
+        <h2>WOODEN WEDGE SAFTETY DRIVE FOR 3 DAYS(KINDLY FILL THE FORM IN CAPITAL LETTER) </h2>
+        <form id="safetydriveform" action="https://script.google.com/macros/s/AKfycbxM7SPMCcl7FoZeSxUcMn6g8Aewawsh_aEKf544iqBmsOraTdF8lZuDj1Kh4HaHeEuPaw/exec" method ="post">
+            <label for="DATE">DATE:</label>
+        <input type="DATE" id="DATE" name="DATE" required>
+
+        <label for="RAILWAY">RAILWAY:</label>
+        <input type="text" id="RAILWAY" name="RAILWAY"required>
+        
+        <label for="DIVISION">DIVISION:</label>
+        <input type="text" id="DIVISION" name="DIVISION"required>
+
+        <label for="(STN/YARD) WHERE CHECKING DONE">(STN/YARD) WHERE CHECKING DONE:</label>
+        <input type="text" id="(STN/YARD) WHERE CHECKING DONE" name="(STN/YARD) WHERE CHECKING DONE" required>
+
+        <label for="LOCO NO">LOCO NO:</label>
+        <input type="number" id="LOCO NO" name="LOCO NO" required>
+        
+        <label for="OWNER SHED/ZONE">OWNER SHED/ZONE:</label>
+        <input type="text" id="OWNER SHED/ZONE" name="OWNER SHED/ZONE" required>
+
+        <label for="TYPE OF LOCO">TYPE OF LOCO:</label>
+        <input type="text" id="TYPE OF LOCO" name="TYPE OF LOCO" required>
+
+        <label for="NO OF WOODEN WEDGE FOUND IN LOCO">NO OF WOODEN WEDGE FOUND IN LOCO:</label>
+        <input type="number" id="NO OF WOODEN WEDGE FOUND IN LOCO" name="NO OF WOODEN WEDGE FOUND IN LOCO" required>
+
+        <label for="REMARKS">REMARKS:</label>
+        <input type="text" id="REMARKS" name="REMARKS" required>
+
+        <label for="CHECKING DONE BY">CHECKING DONE BY:</label>
+        <input type="text" id="CHECKING DONE BY" name="CHECKING DONE BY" required>
+
+            <button id="submitButton" type="submit">SUBMIT</button>
+        </form>
+    </div>
+    <script src="woodenwedge.js"></script>
+</body>
+</html>
