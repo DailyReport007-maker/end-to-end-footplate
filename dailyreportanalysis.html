@@ -1,68 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Daily Report Analysis</title>
+    
+    <!-- External CSS -->
     <link rel="stylesheet" href="dailyreportanalysis.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
-    <script src="test.js"></script> <!-- Link to external JS file -->
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        table, th, td {
-            border: 1px solid black;
-        }
-        th, td {
-            padding: 8px;
-            text-align: left;
-        }
-    </style>
+
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+    <!-- jsPDF CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js" defer></script>
+    <!-- External JS -->
+    <script src="dailyreportanalysis.js" defer></script>
 </head>
+
 <body>
+    <header>
+        <h1 id="reportHeading">Daily Report Analysis</h1>
+    </header>
 
-    <h1 id="reportHeading">Daily Report Analysis</h1>
+    <main>
+        <form id="dutyForm" onsubmit="handleFormSubmit(event)">
+            <label for="cliName">CLI Name:</label>
+            <select id="cliName" required>
+                <option value="" disabled selected>Select CLI Name</option>
+                <!-- Options to be dynamically populated -->
+            </select>
 
-    <form id="dutyForm">
-        <label for="cliName">CLI Name:</label>
-        <select id="cliName"></select>
+            <label for="cliLobby">CLI Lobby:</label>
+            <select id="cliLobby" required>
+                <option value="" disabled selected>Select CLI Lobby</option>
+                <!-- Options to be dynamically populated -->
+            </select>
 
-        <label for="cliLobby">CLI Lobby:</label>
-        <select id="cliLobby"></select>
+            <label for="fromDate">From Date:</label>
+            <input type="date" id="fromDate" required>
 
-        <label for="fromDate">From Date:</label>
-        <input type="date" id="fromDate">
+            <label for="toDate">To Date:</label>
+            <input type="date" id="toDate" required>
 
-        <label for="toDate">To Date:</label>
-        <input type="date" id="toDate">
+            <button type="submit">Submit</button>
+        </form>
 
-        <button type="submit">Submit</button>
-    </form>
+        <div class="action-buttons">
+            <button id="printButton">Print Report</button>
+            <button id="pdfButton">Download PDF</button>
+            <button id="abnormalityDetailsButton">ABNORMALITY DETAILS</button>
+        </div>
 
-    <br>
-    <button id="printButton">Print Report</button>
-    <button id="pdfButton">Download PDF</button>
-    <button id="abnormalityDetailsButton">ABNORMALITY DETAILS</button>
+        <section class="report-section">
+            <table id="reportForm">
+                <thead>
+                    <tr>
+                        <th>Parameter</th>
+                        <th>Done</th>
+                        <th>Abnormality</th>
+                    </tr>
+                </thead>
+                <tbody id="reportFormBody">
+                    <!-- Dynamic rows will be added here -->
+                </tbody>
+            </table>
+        </section>
 
-    <br><br>
-
-    <table id="reportForm">
-        <thead>
-            <tr>
-                <th>Parameter</th>
-                <th>Done</th>
-                <th>Abnormality</th>
-            </tr>
-        </thead>
-        <tbody id="reportFormBody">
-        </tbody>
-    </table>
-
-    <canvas id="barGraphCanvas"></canvas>
-    <canvas id="pieChartCanvas"></canvas>
-
+        <section class="charts-section">
+            <canvas id="barGraphCanvas" aria-label="Bar Graph" role="img"></canvas>
+            <canvas id="pieChartCanvas" aria-label="Pie Chart" role="img"></canvas>
+        </section>
+    </main>
 </body>
+
 </html>

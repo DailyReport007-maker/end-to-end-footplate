@@ -1,3 +1,16 @@
+/* Color Variables */
+:root {
+    --primary-color: #007bff;
+    --primary-hover: #0056b3;
+    --secondary-color: #17a2b8;
+    --secondary-hover: #138496;
+    --danger-color: #f61810;
+    --light-bg: #f4f4f4;
+    --text-color: #333;
+    --table-border: #ddd;
+    --even-row-bg: #f2f2f2;
+}
+
 /* Basic Reset */
 * {
     margin: 0;
@@ -9,12 +22,12 @@
 body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
-    color: #333;
-    background-color: #f4f4f4;
+    color: var(--text-color);
+    background-color: var(--light-bg);
     padding: 20px;
 }
 
-/* Container for the form and charts */
+/* Container Styling */
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -29,80 +42,54 @@ form {
     margin-bottom: 20px;
 }
 
-.form-group {
-    margin-bottom: 15px;
-}
-
-.form-group label {
+form label {
     display: block;
     font-weight: bold;
     margin-bottom: 5px;
 }
 
-.form-group select,
-.form-group input[type="date"] {
+form select,
+form input[type="date"] {
     width: 100%;
     padding: 10px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--table-border);
     border-radius: 4px;
     font-size: 16px;
 }
 
-.form-group input[type="submit"] {
-    background: #007bff;
+form button[type="submit"] {
+    background: var(--primary-color);
     color: #fff;
     border: none;
     padding: 10px 20px;
     border-radius: 4px;
     font-size: 16px;
     cursor: pointer;
+    transition: background 0.3s ease;
 }
 
-.form-group input[type="submit"]:hover {
-    background: #0056b3;
+form button[type="submit"]:hover {
+    background: var(--primary-hover);
 }
 
-/* Print Report and Download PDF Buttons Styling */
-#pdfButton,
-#printButton {
-    background-color: #17a2b8; /* Light blue color */
+/* Action Buttons Styling */
+button#pdfButton,
+button#printButton,
+button#abnormalityDetailsButton {
+    background-color: var(--secondary-color);
+    color: white;
     border: none;
-    color: white;
     padding: 12px 20px;
-    text-align: center;
-    display: inline-block;
     font-size: 16px;
-    margin: 5px 2px;
-    cursor: pointer;
     border-radius: 4px;
+    cursor: pointer;
     transition: background-color 0.3s ease, transform 0.3s ease;
+    margin: 5px 5px 0 0;
 }
 
-#pdfButton:hover,
-#printButton:hover {
-    background-color: #138496; /* Darker blue on hover */
+button:hover {
+    background-color: var(--secondary-hover);
     transform: scale(1.05);
-}
-
-#reportForm {
-    border-collapse: collapse; /* Ensures that table borders are combined into a single border */
-    width: 100%;
-    border: 2px solid black; /* Medium thick black border for the outer table */
-}
-
-#reportForm td, #reportForm th {
-    border: 2px solid black; /* Medium thick black borders for all cells */
-    padding: 8px;
-    text-align: left;
-}
-
-#reportForm tr:nth-child(even) {
-    background-color: #f2f2f2; /* Optional: Add background color for even rows */
-}
-
-#reportForm th {
-    background-color: #f61810; /* Optional: Add background color for header */
-    color: white;
 }
 
 /* Table Styling */
@@ -113,7 +100,7 @@ table {
 }
 
 table, th, td {
-    border: 1px solid #ddd;
+    border: 1px solid var(--table-border);
 }
 
 th, td {
@@ -122,11 +109,15 @@ th, td {
 }
 
 th {
-    background: #007bff;
+    background: var(--primary-color);
     color: #fff;
 }
 
-/* Chart Container Styling */
+tr:nth-child(even) {
+    background-color: var(--even-row-bg);
+}
+
+/* Charts Styling */
 .chart-container {
     margin-bottom: 30px;
 }
@@ -136,12 +127,10 @@ th {
     margin-bottom: 15px;
 }
 
-/* Canvas Styling */
-.canvas {
+canvas {
     width: 100%;
     height: auto;
     max-height: 400px;
-    margin: 0 auto;
 }
 
 /* Responsive Styling */
@@ -150,11 +139,9 @@ th {
         padding: 15px;
     }
 
-    form {
-        margin-bottom: 15px;
-    }
-
-    button[type="submit"], #pdfButton, #printButton {
+    form button,
+    button#pdfButton,
+    button#printButton {
         width: 100%;
         margin: 5px 0;
     }
@@ -163,7 +150,7 @@ th {
         font-size: 14px;
     }
 
-    table th, table td {
+    th, td {
         padding: 8px;
     }
 }
@@ -179,21 +166,22 @@ th {
         box-shadow: none;
         border: none;
         padding: 0;
-        margin: 0;
     }
 
-    form, #printReport, #pdfButton, #printButton {
-        display: none; /* Hide form and buttons on print */
+    form, 
+    button#pdfButton,
+    button#printButton,
+    button#abnormalityDetailsButton {
+        display: none;
     }
 
     table {
         width: 100%;
-        border: 1px solid #ddd;
         border-collapse: collapse;
     }
 
-    table th, table td {
-        border: 1px solid #ddd;
+    th, td {
+        border: 1px solid var(--table-border);
         padding: 8px;
     }
 }
