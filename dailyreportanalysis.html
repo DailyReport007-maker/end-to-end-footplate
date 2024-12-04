@@ -3,73 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Duty Analysis</title>
+    <title>Daily Report Analysis</title>
     <link rel="stylesheet" href="dailyreportanalysis.css">
-    <!-- Include Chart.js library -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="test.js"></script> <!-- Link to external JS file -->
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Duty Analysis</h1>
 
-        <form id="dutyForm">
-            <div class="form-group">
-                <label for="cliName">CLI NAME</label>
-                <select id="cliName">
-                    <!-- Options will be populated here -->
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="cliLobby">CLI LOBBY</label>
-                <select id="cliLobby">
-                    <!-- Options will be populated here -->
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="fromDate">FROM DATE</label>
-                <input type="date" id="fromDate">
-            </div>
-            <div class="form-group">
-                <label for="toDate">TO DATE</label>
-                <input type="date" id="toDate">
-            </div>
-            <div class="form-group">
-                <input type="submit" value="ANALYZE THE DUTY">
-            </div>
-        </form>
+    <h1 id="reportHeading">Daily Report Analysis</h1>
 
-        <div id="reportContainer">
-            <h2 id="reportHeading">DAILY REPORT ANALYSIS</h2>
-            <button id="printButton">Print Report</button>
-            <button id="pdfButton">Download PDF</button>
-            <table id="reportForm">
-                <thead>
-                    <tr>
-                        <th>PARAMETERS</th>
-                        <th>DONE</th>
-                        <th>ABNORMALITY</th>
-                    </tr>
-                </thead>
-                <tbody id="reportFormBody">
-                    <!-- Rows will be populated by JavaScript -->
-                </tbody>
-            </table>
+    <form id="dutyForm">
+        <label for="cliName">CLI Name:</label>
+        <select id="cliName"></select>
 
-            <div class="chart-container">
-                <h2>Bar Graph</h2>
-                <canvas id="barGraphCanvas" class="canvas"></canvas>
-            </div>
+        <label for="cliLobby">CLI Lobby:</label>
+        <select id="cliLobby"></select>
 
-            <div class="chart-container">
-                <h2>Pie Chart</h2>
-                <canvas id="pieChartCanvas" class="canvas"></canvas>
-            </div>
-        </div> <!-- Close container div -->
-    </div>
+        <label for="fromDate">From Date:</label>
+        <input type="date" id="fromDate">
 
-    <script src="dailyreportanalysis.js"></script>
+        <label for="toDate">To Date:</label>
+        <input type="date" id="toDate">
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <br>
+    <button id="printButton">Print Report</button>
+    <button id="pdfButton">Download PDF</button>
+    <button id="abnormalityDetailsButton">ABNORMALITY DETAILS</button>
+
+    <br><br>
+
+    <table id="reportForm">
+        <thead>
+            <tr>
+                <th>Parameter</th>
+                <th>Done</th>
+                <th>Abnormality</th>
+            </tr>
+        </thead>
+        <tbody id="reportFormBody">
+        </tbody>
+    </table>
+
+    <canvas id="barGraphCanvas"></canvas>
+    <canvas id="pieChartCanvas"></canvas>
+
 </body>
 </html>
