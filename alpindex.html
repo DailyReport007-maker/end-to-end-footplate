@@ -1,85 +1,97 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <title>END TO END FOOTPLATE</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
-    
 </head>
 <body>
     <div class="form-container">
-    <h2>END TO END FOOTPLATE FORM</h2>
+        <h2>END TO END FOOTPLATE FORM</h2>
         <form id="footplateForm">
-            <label for="CLI NAME">CLI NAME:</label>
-            <select id="cliName"name="CLI NAME" required>
+            <label for="cliName">CLI NAME:</label>
+            <select id="cliName" name="CLI NAME" required>
                 <option value="">Select CLI NAME</option>
             </select><br><br>
         
-            <label for="ALP ID">ALP ID:</label>
-            <select id="alpId"name="ALP ID" required>
+            <label for="alpId">ALP ID:</label>
+            <select id="alpId" name="ALP ID" required>
                 <option value="">Select ALP ID</option>
             </select><br><br>
             
-            <label for="ALP NAME">ALP NAME:</label>
-            <input type="text" id="alpName"name="ALP NAME" readonly><br><br>
+            <label for="alpName">ALP NAME:</label>
+            <input type="text" id="alpName" name="ALP NAME" readonly><br><br>
             
-            <label for="DESG">DESG:</label>
-            <input type="text" id="desg"name="DESG" readonly><br><br>
+            <label for="desg">DESG:</label>
+            <input type="text" id="desg" name="DESG" readonly><br><br>
             
-            <label for="HQ">HQ:</label>
-            <input type="text" id="hq"name="HQ" readonly><br><br>
+            <label for="hq">HQ:</label>
+            <input type="text" id="hq" name="HQ" readonly><br><br>
             
+            <label for="BEAT">BEAT:</label>
+            <select id="BEAT" name="BEAT" required>
+                <option value="">Select BEAT</option>
+                <option value="AKT-USL">AKT-USL</option>
+                <option value="AKT-RIG">AKT-RIG</option>
+                <option value="AKT-KRBA">AKT-KRBA</option>
+                <option value="BSP-SDL">BSP-SDL</option>
+                <option value="BSP-RIG">BSP-RIG</option>
+                <option value="BSP-KRBA">BSP-KRBA</option>
+                <option value="BSP-DBEC">BSP-DBEC</option>
+                <option value="USL-NKJ">USL-NKJ</option>
+                <option value="USL-DBEC">USL-DBEC</option>
+                <option value="USL-RIG">USL-RIG</option>
+                <option value="USL-KRBA">USL-KRBA</option>
+                <option value="PND-BSP">PND-BSP</option>
+                <option value="PND-NKJ">PND-NKJ</option>
+                <option value="SDL-SGO">SDL-SGO</option>
+                <option value="SDL-BSP">SDL-BSP</option>
+                <option value="SDL-NKJ">SDL-NKJ</option>
+                <option value="NKJ-SDL">NKJ-SDL</option>
+                <option value="SDL-BJRI">SDL-BJRI</option>
+                <option value="BJRI-SDL">BJRI-SDL</option>
+                <option value="SDL-ABKP">SDL-ABKP</option>
+                <option value="KHS-USL">KHS-USL</option>
+                <option value="KHS-BRJN">KHS-BRJN</option>
+                <option value="KHS-DMJY">KHS-DMJY</option>
+                <option value="KHS-KRBA">KHS-KRBA</option>
+                <option value="BRJN-ROU">BRJN-ROU</option>
+                <option value="BRJN-RIG">BRJN-RIG</option>
+                <option value="BRJN-SBP">BRJN-SBP</option>
+                <option value="KRBA-DPK">KRBA-DPK</option>
+                <option value="KRBA-USL">KRBA-USL</option>
+                <option value="KRBA-RIG">KRBA-RIG</option>
+                <option value="BJRI-ABKP">BJRI-ABKP</option>
+                <option value="BJRI-BSP">BJRI-BSP</option>
+                <option value="BJRI-NKJ">BJRI-NKJ</option>
+                <option value="RIG-USL">RIG-USL</option>
+                <option value="RIG-ROU">RIG-ROU</option>
+                <option value="SJQ-ABKP-PSRS">SJQ-ABKP-PSRS</option>
+                <option value="SJQ-SDL">SJQ-SDL</option>
+                <option value="BSP-BJRI">BSP-BJRI</option>
+                <option value="USL-RSD">USL-RSD</option>
+                <option value="BSP-RSD">BSP-RSD</option>
+                <option value="BSP-NGP">BSP-NGP</option>
+                <option value="BSP-CKP">BSP-CKP</option>
+                <option value="BSP-TATA">BSP-TATA</option>
+                <option value="BSP-ROU">BSP-ROU</option>
+                <option value="BSP-SBP">BSP-SBP</option>
+                <option value="OTHER">OTHER BEAT</option>
+            </select>
+            
+            <!-- Hidden input field for OTHER BEAT -->
+            <input type="text" id="otherBeatInput" name="otherBeat" placeholder="Enter other beat" style="display: none; margin-top: 10px;">
+            
+            <br><br>
+            
+            <label for="DATE">DATE:</label>
+            <input type="date" id="DATE" name="DATE" required><br><br>
 
-        <label for="BEAT">BEAT:</label>
-        <select id="BEAT"name="BEAT" required>
-            <option value="">Select BEAT</option>
-            <option value="AKT-USL">AKT-USL</option>
-<option value="AKT-RIG">AKT-RIG</option>
-<option value="AKT-KRBA">AKT-KRBA</option>
-<option value="BSP-SDL">BSP-SDL</option>
-<option value="BSP-RIG">BSP-RIG</option>
-<option value="BSP-KRBA">BSP-KRBA</option>
-<option value="BSP-DBEC">BSP-DBEC</option>
-<option value="USL-NKJ">USL-NKJ</option>
-<option value="USL-DBEC">USL-DBEC</option>
-<option value="USL-RIG">USL-RIG</option>
-<option value="USL-KRBA">USL-KRBA</option>
-<option value="PND-BSP">PND-BSP</option>
-<option value="PND-NKJ">PND-NKJ</option>
-<option value="SDL-SGO">SDL-SGO</option>
-<option value="SDL-BSP">SDL-BSP</option>
-<option value="SDL-ABKP">SDL-ABKP</option>
-<option value="KHS-USL">KHS-USL</option>
-<option value="KHS-BRJN">KHS-BRJN</option>
-<option value="KHS-DMJY">KHS-DMJY</option>
-<option value="KHS-KRBA">KHS-KRBA</option>
-<option value="BRJN-ROU">BRJN-ROU</option>
-<option value="BRJN-RIG">BRJN-RIG</option>
-<option value="BRJN-SBP">BRJN-SBP</option>
-<option value="KRBA-DPK">KRBA-DPK</option>
-<option value="KRBA-USL">KRBA-USL</option>
-<option value="KRBA-RIG">KRBA-RIG</option>
-<option value="BJRI-ABKP">BJRI-ABKP</option>
-<option value="BJRI-BSP">BJRI-BSP</option>
-<option value="BJRI-NKJ">BJRI-NKJ</option>
-<option value="RIG-USL">RIG-USL</option>
-<option value="RIG-ROU">RIG-ROU</option>
-<option value="SJQ-ABKP-PSRS">SJQ-ABKP-PSRS</option>
-<option value="SJQ-SDL">SJQ-SDL</option>
-<option value="BSP-BJRI">BSP-BJRI</option>
-</select><br><br>
-
-<label for="DATE">DATE:</label>
-<input type="date" id="DATE" name="DATE" required><br><br>
-
-
-        
-
-        <button id="submitButton" type="submit">SUBMIT</button>
-    </form>
-</div>
+            <button id="submitButton" type="submit">SUBMIT</button>
+        </form>
+    </div>
     <script src="alpindex.js"></script>
 </body>
 </html>
